@@ -11,14 +11,38 @@ const App = () => {
   const [result, setResult] = useState(null);
 
   const buttonPress = (label) => {
-    if(!isNaN(label)){
+    if (!isNaN(label)) {
       setCurrentValue((prev) => prev + label);
-    }else if(["+","-","*","/"].includes(label)){
+    } else if(label==="."){
+      if(!currentValue.includes(".")){
+        setCurrentValue((prev) => (prev === ''? '0.': prev + '.'))
+      }
+    }
+    
+    else if (["+", "-", "*", "/"].includes(label)) {
       setPreviousValue(currentValue);
       setCurrentValue(" ");
-      setOperator(label)
-    }else if (label==="="){
-      if(previousValue && operator && currentValue){
+      setOperator(label);
+    }    
+    else if (label === "%") {
+      let calculation;
+
+      if (operator && previousValue) {
+        // Calculate percentage of previousValue based on currentValue
+        calculation = eval(`${previousValue} * ${currentValue} / 100`);
+      } else {
+        // Calculate percentage of currentValue
+        calculation = eval(`${currentValue} / 100`);
+      }
+
+      setResult(calculation);
+      setCurrentValue(String(calculation));
+      setPreviousValue("");
+      setOperator(null);
+      console.log(calculation);
+    }
+    else if (label === "=") {
+      if (previousValue && operator && currentValue) {
         const calculation = eval(`${previousValue} ${operator} ${currentValue}`)
         setResult(calculation);
         setCurrentValue(String(calculation))
@@ -26,13 +50,15 @@ const App = () => {
         setOperator(null);
         console.log(calculation)
       }
-    }else if(label==="C"){
+    } else if (label === "C") {
       setCurrentValue('');
       setPreviousValue('');
       setOperator(null);
       setResult(null);
     }
-  
+
+
+
   };
 
   return (
@@ -43,7 +69,7 @@ const App = () => {
           <div id="display" style={{ textAlign: 'right' }}>
             <div id="answer">{result !== null ? result : currentValue || "0"}</div>
             <div id="expression">
-            {previousValue} {operator} {currentValue} 
+              {previousValue} {operator} {currentValue}
             </div>
           </div>
           {buttons.map((button) => <Button Class={button.Class} ID={button.ID} Label={button.Label} onClick={() => { buttonPress(button.Label) }} key={button.ID} />)}
