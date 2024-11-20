@@ -1,0 +1,22 @@
+export const buttons = [
+    { ID: "clear", Class: "light-grey", Label: "C" },
+    { ID: "negative", Class: "light-grey", Label: "+/-" },
+    { ID: "percentage", Class: "light-grey", Label: "%" },
+    { ID: "divide", Class: "yellow", Label: "/" },
+    { ID: "seven", Class: "dark-grey", Label: "7" },
+    { ID: "eight", Class: "dark-grey", Label: "8" },
+    { ID: "nine", Class: "dark-grey", Label: "9" },
+    { ID: "multiply", Class: "yellow", Label: "*" },
+    { ID: "four", Class: "dark-grey", Label: "4" },
+    { ID: "five", Class: "dark-grey", Label: "5" },
+    { ID: "six", Class: "dark-grey", Label: "6" },
+    { ID: "subtract", Class: "yellow", Label: "-" },
+    { ID: "one", Class: "dark-grey", Label: "1" },
+    { ID: "two", Class: "dark-grey", Label: "2" },
+    { ID: "three", Class: "dark-grey", Label: "3" },
+    { ID: "add", Class: "yellow", Label: "+" },
+    { ID: "zero", Class: "dark-grey", Label: "0" },
+    { ID: "decimals", Class: "dark-grey", Label: "." },
+    { ID: "equals", Class: "light-grey", Label: "=" },
+  ];
+  
