@@ -12,7 +12,9 @@ const App = () => {
 
   const buttonPress = (label) => {
     if (!isNaN(label)) {
-      setCurrentValue((prev) => prev + label);
+      setCurrentValue((prev) =>
+        prev === "0" ? label : prev + label
+      );
     } else if(label==="."){
       if(!currentValue.includes(".")){
         setCurrentValue((prev) => (prev === ''? '0.': prev + '.'))
@@ -20,8 +22,14 @@ const App = () => {
     }
     
     else if (["+", "-", "*", "/"].includes(label)) {
-      setPreviousValue(currentValue);
-      setCurrentValue(" ");
+      if (operator && previousValue && currentValue) {
+        const intermediateResult = eval(`${previousValue} ${operator} ${currentValue}`);
+        setPreviousValue(String(intermediateResult));
+        setCurrentValue("");
+      } else {
+        setPreviousValue(currentValue);
+        setCurrentValue("");
+      }
       setOperator(label);
     }    
     else if (label === "%") {
@@ -69,7 +77,7 @@ const App = () => {
           <div id="display" style={{ textAlign: 'right' }}>
             <div id="answer">{result !== null ? result : currentValue || "0"}</div>
             <div id="expression">
-              {previousValue} {operator} {currentValue}
+             {previousValue && operator ? `${previousValue} ${operator}` : ""}
             </div>
           </div>
           {buttons.map((button) => <Button Class={button.Class} ID={button.ID} Label={button.Label} onClick={() => { buttonPress(button.Label) }} key={button.ID} />)}
