@@ -16,7 +16,7 @@ export const buttons = [
     { ID: "three", Class: "dark-grey", Label: "3" },
     { ID: "add", Class: "yellow", Label: "+" },
     { ID: "zero", Class: "dark-grey", Label: "0" },
-    { ID: "decimals", Class: "dark-grey", Label: "." },
+    { ID: "decimal", Class: "dark-grey", Label: "." },
     { ID: "equals", Class: "light-grey", Label: "=" },
   ];
   
